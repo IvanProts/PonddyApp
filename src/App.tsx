@@ -6,7 +6,11 @@ import Navigation from './navigation';
 const App = () => {
   return (
     <SafeAreaWrapper>
-      <StatusBar barStyle="dark-content" backgroundColor={'blue'} />
+      <StatusBar
+        barStyle="dark-content"
+        backgroundColor={'blue'}
+        hidden={true}
+      />
       <Navigation />
     </SafeAreaWrapper>
   );

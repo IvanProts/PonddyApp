@@ -1,6 +1,7 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
-import FirstOnboardingScreen from '../features/onboarding/FirstOnboardingScreen';
+import SecondOnboardingScreen from '../features/onboarding/screens/SecondOnboardingScreen';
+import FirstOnboardingScreen from '../features/onboarding/screens/FirstOnboardingScreen';
 import {SCREENS} from '../types/navigation';
 
 const OnboardingStack: React.FC = () => {
@@ -14,7 +15,7 @@ const OnboardingStack: React.FC = () => {
       <Stack.Screen name={FIRST_ONBOARDING} component={FirstOnboardingScreen} />
       <Stack.Screen
         name={SECOND_ONBOARDING}
-        component={FirstOnboardingScreen}
+        component={SecondOnboardingScreen}
       />
     </Stack.Navigator>
   );
