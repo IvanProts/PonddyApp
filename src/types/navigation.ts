@@ -7,6 +7,7 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 export enum SCREENS {
   FIRST_ONBOARDING = 'First onboarding screen',
   SECOND_ONBOARDING = 'Second onboarding screen',
+  GRAMMAR = 'Grammar screen',
 }
 
 export enum STACKS {

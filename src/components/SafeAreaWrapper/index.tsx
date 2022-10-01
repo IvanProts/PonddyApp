@@ -1,4 +1,5 @@
 import React, {memo} from 'react';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
 import {styles} from './styles';
@@ -9,7 +10,9 @@ type Props = {
 
 const SafeAreaWrapper: React.FC<Props> = ({children}) => {
   return (
-    <SafeAreaView style={styles.safeAreaContainer}>{children}</SafeAreaView>
+    <GestureHandlerRootView style={styles.safeAreaContainer}>
+      <SafeAreaView style={styles.safeAreaContainer}>{children}</SafeAreaView>
+    </GestureHandlerRootView>
   );
 };
 

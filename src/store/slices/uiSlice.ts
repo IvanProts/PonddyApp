@@ -3,7 +3,7 @@ import {reducerNames} from '../../helpers/constants';
 import {UIState} from '../../types/states';
 
 const uiState: UIState = {
-  showStatusBar: false,
+  showStatusBar: true,
 };
 
 export const uiSlice = createSlice({

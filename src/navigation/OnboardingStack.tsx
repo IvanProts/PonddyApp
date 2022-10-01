@@ -3,10 +3,11 @@ import React from 'react';
 import SecondOnboardingScreen from '../features/onboarding/screens/SecondOnboardingScreen';
 import FirstOnboardingScreen from '../features/onboarding/screens/FirstOnboardingScreen';
 import {SCREENS} from '../types/navigation';
+import GrammarScreen from '../features/grammar/screens/GrammarScreen';
 
 const OnboardingStack: React.FC = () => {
   const Stack = createNativeStackNavigator();
-  const {FIRST_ONBOARDING, SECOND_ONBOARDING} = SCREENS;
+  const {FIRST_ONBOARDING, SECOND_ONBOARDING, GRAMMAR} = SCREENS;
 
   return (
     <Stack.Navigator
@@ -17,6 +18,7 @@ const OnboardingStack: React.FC = () => {
         name={SECOND_ONBOARDING}
         component={SecondOnboardingScreen}
       />
+      <Stack.Screen name={GRAMMAR} component={GrammarScreen} />
     </Stack.Navigator>
   );
 };

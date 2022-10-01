@@ -11,11 +11,7 @@ const App = () => {
 
   return (
     <SafeAreaWrapper>
-      <StatusBar
-        barStyle="dark-content"
-        backgroundColor={'blue'}
-        hidden={isStatusBarVisible}
-      />
+      <StatusBar hidden={isStatusBarVisible} />
       <Provider store={store}>
         <Navigation />
       </Provider>
