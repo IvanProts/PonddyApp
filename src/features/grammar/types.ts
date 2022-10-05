@@ -10,7 +10,7 @@ export type AudioButtonType = {
 };
 
 export type LevelSectionType = {
-  chosenItem?: Segment;
+  chosenItem?: any;
 };
 
 export type AnchorType = {
@@ -21,4 +21,5 @@ export type BottomSheetType = {
   chosenItem?: Segment;
   play: () => void;
   bottomRef: React.Ref<BottomSheet>;
+  itemInfo?: any;
 };

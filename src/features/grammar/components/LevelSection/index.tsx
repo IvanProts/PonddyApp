@@ -5,18 +5,21 @@ import {styles} from './styles';
 
 const LevelSection: React.FC<LevelSectionType> = ({chosenItem}) => {
   return (
-    <View style={styles.contentBox}>
-      <View style={styles.buttonContainer}>
-        <Text style={styles.lvlText}>
-          {`LVL ${
-            chosenItem?.levels?.level_hsk || chosenItem?.levels?.level_hsk_3
-          }`}
-        </Text>
+    <>
+      <View style={styles.contentBox}>
+        <View style={styles.buttonContainer}>
+          <Text style={styles.lvlText}>
+            {`LVL ${chosenItem?.level_hsk || chosenItem?.level_hsk_3}`}
+          </Text>
+        </View>
+        <Text style={styles.posText}>{chosenItem?.pos}</Text>
+        <Text style={styles.wordText}>{chosenItem?.simp}</Text>
+        <Text style={styles.word}>{chosenItem?.trad}</Text>
       </View>
-      <Text style={styles.posText}>{chosenItem?.pos}</Text>
-      <Text style={styles.wordText}>{chosenItem?.word}</Text>
-      <Text style={styles.word}>{chosenItem?.word}</Text>
-    </View>
+      <View style={styles.contentBox}>
+        <Text style={styles.translationText}>{chosenItem?.english}</Text>
+      </View>
+    </>
   );
 };
 

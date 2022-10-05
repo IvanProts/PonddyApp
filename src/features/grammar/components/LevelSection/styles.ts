@@ -6,6 +6,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     width: '100%',
+    marginBottom: 14,
   },
   buttonContainer: {
     width: 48,
@@ -20,4 +21,5 @@ export const styles = StyleSheet.create({
   posText: {marginRight: 8, fontSize: 16, fontWeight: '700'},
   wordText: {marginRight: 8, color: '#D5D7D9'},
   word: {fontSize: 16, fontWeight: '500', color: '#576168'},
+  translationText: {fontSize: 14, fontWeight: '600'},
 });

@@ -1,6 +1,6 @@
-import React, {useCallback, useMemo, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {View, Text, TouchableOpacity, FlatList} from 'react-native';
-import {useGetWordsQuery} from '../../../../api/grammar';
+import {useGetWordMutation, useGetWordsQuery} from '../../../../api/grammar';
 import GrammarHeader from '../../components/GrammarHeader';
 import BottomSheet from '@gorhom/bottom-sheet';
 import BottomSheetView from '../../components/BottomSheet';
@@ -15,6 +15,7 @@ const BOTTOM_SHEET_RENDER_TIME = 400;
 
 const GrammarScreen: React.FC = () => {
   const {data} = useGetWordsQuery();
+  const [getWord, {data: segmentInfo, error}] = useGetWordMutation();
   const [chosenItemId, setChosenItemId] = useState<number>();
   const [chosenItem, setChosenItem] = useState<Segment>();
   const bottomSheetRef = useRef<BottomSheet>(null);
@@ -32,14 +33,18 @@ const GrammarScreen: React.FC = () => {
     sound.play();
   }, [sound]);
 
-  const onItemPress = useCallback((index: number, item: Segment) => {
-    setChosenItemId(index);
-    bottomSheetRef.current?.close();
-    setTimeout(() => {
-      setChosenItem(item);
-      bottomSheetRef.current?.snapToIndex(0);
-    }, BOTTOM_SHEET_RENDER_TIME);
-  }, []);
+  const onItemPress = useCallback(
+    async (index: number, item: Segment) => {
+      setChosenItemId(index);
+      await getWord({ids: [item.id]});
+      bottomSheetRef.current?.close();
+      setTimeout(() => {
+        setChosenItem(item);
+        bottomSheetRef.current?.snapToIndex(0);
+      }, BOTTOM_SHEET_RENDER_TIME);
+    },
+    [getWord],
+  );
 
   const renderSegments = useCallback(() => {
     return (
@@ -54,10 +59,12 @@ const GrammarScreen: React.FC = () => {
               <>
                 {item.anchor && <Anchor isPositionAbsolute />}
                 <TouchableOpacity
+                  disabled={!item.levels}
                   key={index}
                   style={[
                     styles.item,
                     chosenItemId === index && styles.chosenItem,
+                    !item.levels && styles.chosenItemDisabled,
                   ]}
                   onPress={() => onItemPress(index, item)}>
                   <Text style={styles.segmentStyle}>{item.word}</Text>
@@ -90,11 +97,14 @@ const GrammarScreen: React.FC = () => {
           </View>
         </View>
       </View>
-      <BottomSheetView
-        play={playTranslation}
-        bottomRef={bottomSheetRef}
-        chosenItem={chosenItem}
-      />
+      {segmentInfo && (
+        <BottomSheetView
+          play={playTranslation}
+          bottomRef={bottomSheetRef}
+          chosenItem={chosenItem}
+          itemInfo={segmentInfo[0]}
+        />
+      )}
     </>
   );
 };

@@ -1,4 +1,4 @@
-import React, {memo, useMemo} from 'react';
+import React, {memo, useCallback, useMemo} from 'react';
 import {Text, View} from 'react-native';
 import AudioButton from '../AudioButton';
 import Divider from '../Divider';
@@ -8,13 +8,19 @@ import SelectedItemBox from '../SelectedItemBox';
 import {styles} from './styles';
 import BottomSheet from '@gorhom/bottom-sheet';
 import {BottomSheetType} from '../../types';
+import Sound from 'react-native-sound';
 
 const BottomSheetView: React.FC<BottomSheetType> = ({
-  play,
   chosenItem,
   bottomRef,
+  itemInfo,
 }) => {
   const snapPoint = useMemo(() => ['50%'], []);
+  const sound = useMemo(() => new Sound(itemInfo?.voice), [itemInfo?.voice]);
+
+  const playTranslation = useCallback(() => {
+    sound.play();
+  }, [sound]);
   return (
     <BottomSheet
       style={styles.bottomSheet}
@@ -33,10 +39,10 @@ const BottomSheetView: React.FC<BottomSheetType> = ({
           </View>
         </View>
         <View style={styles.middleContent}>
-          <AudioButton onPress={play} />
-          <Text style={styles.textColor}>{chosenItem?.word}</Text>
+          <AudioButton onPress={playTranslation} />
+          <Text style={styles.textColor}>{itemInfo?.pinyin}</Text>
         </View>
-        <LevelSection chosenItem={chosenItem} />
+        <LevelSection chosenItem={itemInfo} />
       </View>
     </BottomSheet>
   );

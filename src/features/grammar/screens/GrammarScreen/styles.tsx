@@ -20,6 +20,9 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#3F98D1',
   },
+  chosenItemDisabled: {
+    opacity: 0.3,
+  },
   disabledItem: {
     color: '#C0C4C6',
   },
